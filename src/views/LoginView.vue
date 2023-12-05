@@ -14,14 +14,14 @@
 
       <!-- Second div -->
       <div class="lg:w-1/2 p-4 mt-4 lg:mt-0 bg-white shadow-2xl rounded-lg">
-        <form>
+        <form @submit.prevent="login">
           <div class="mb-4">
             <input type="text" id="email" name="email"
-              class="w-full h-12 p-2 border rounded focus:outline-none focus:border-blue-500"
-              placeholder="Email address or phone number">
+              class="w-full h-12 p-2 border rounded focus:outline-none focus:border-blue-500" placeholder="Email address"
+              v-model="email">
           </div>
           <div class="mb-4">
-            <input type="password" id="password" name="password" size="10"
+            <input type="password" id="password" name="password" size="10" v-model="password"
               class="w-full h-12 p-2 border rounded focus:outline-none focus:border-blue-500" placeholder="Password">
           </div>
           <button type="submit"
@@ -39,3 +39,27 @@
     </div>
   </div>
 </template>
+
+<script>
+import { useAuthStore } from '../stores/auth'
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    async login() {
+      const authStore = useAuthStore();
+      const success = await authStore.login(this.email, this.password);
+      if(success){
+          this.$router.push('/')
+      }else{
+        // handel login fail
+      }
+    }
+  }
+}
+</script>

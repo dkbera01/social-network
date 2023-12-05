@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    /* background-color: #f0f2f5; */
+    background-color: #f0f2f5;
   }
   html {
     font-family: "Proxima Nova", system-ui, sans-serif;
