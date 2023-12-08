@@ -21,6 +21,8 @@ const router = createRouter({
 const routesInaccessibleToAuth = ["Login", "Registration"];
 
 router.beforeEach(async (to, from, next) => {
+  const body = document.querySelector('body');
+  body.classList.add('md:container', 'md:mx-auto');
   const token = localStorage.getItem("token");
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!token) {
